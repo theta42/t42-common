@@ -1,0 +1,11 @@
+# t42-common CHANGELOG
+
+This file is used to list changes made in each version of the t42-common cookbook.
+
+# 0.1.0
+
+Initial release.
+
+- change 0
+- change 1
+
