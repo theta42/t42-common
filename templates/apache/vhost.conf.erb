@@ -48,7 +48,7 @@
 
     <% if node['web']['wsgi'] %>
     
-    WSGIDaemonProcess <%= node['app']['name'] %> python-path=<%= node['python']['working-dir'] %> python-home=<%= node['python']['virtualenv_path'] %>
+    WSGIDaemonProcess <%= node['app']['name'] %> python-path=<%= node['python']['working-dir'] %> python-home=<%= node['python']['env_path'] %>
     WSGIProcessGroup <%= node['app']['name'] %>
     WSGIScriptAlias / <%= node['working-dir'] %>/<%= node['web']['wsgi']['wsgi_path'] %>
 
