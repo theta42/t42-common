@@ -1,3 +1,12 @@
+execute 'add key' do
+  command 'wget -qO - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -'
+end
+
+execute 'add repo' do
+  command 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+end
+
+
 apt_update 'update' do
 end.run_action(:update) if platform_family?('debian')
 
