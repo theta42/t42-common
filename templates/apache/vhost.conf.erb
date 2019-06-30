@@ -41,11 +41,13 @@
       </FilesMatch>
     </IfModule>
 
+    <% if node['web']['static'] %>
     <% node['web']['static'].each do |static| -%>
     Alias <%= static['uri'] %> <%= node['working-dir'] %>/<%= static['path'] %>
 
     <% end -%>
-
+    <% end -%>
+    
     <% if node['web']['wsgi'] %>
     
     WSGIDaemonProcess <%= node['app']['name'] %> python-path=<%= node['python']['working-dir'] %> python-home=<%= node['python']['env_path'] %>
