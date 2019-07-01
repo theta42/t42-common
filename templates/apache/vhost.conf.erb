@@ -41,13 +41,22 @@
       </FilesMatch>
     </IfModule>
 
+    <% if node['web']['root'] %>
+    DocumentRoot <%= node['web']['root'] %>
+    <Directory <%= node['web']['root'] %>/>
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+    </Directory>
+    <% end - %>
+
     <% if node['web']['static'] %>
     <% node['web']['static'].each do |static| -%>
     Alias <%= static['uri'] %> <%= node['working-dir'] %>/<%= static['path'] %>
 
     <% end -%>
     <% end -%>
-    
+
     <% if node['web']['wsgi'] %>
     
     WSGIDaemonProcess <%= node['app']['name'] %> python-path=<%= node['python']['working-dir'] %> python-home=<%= node['python']['env_path'] %>
