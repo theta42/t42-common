@@ -57,6 +57,7 @@ execute 'Install NPM package.json' do
 	cwd node['nodejs']['env_path']
 	user node['app']['run_user']
 	group node['app']['run_user']
+	environment ({'HOME' => "/home/#{node['app']['run_user']}"})
 	command "npm --prefix #{node['nodejs']['env_path']} install #{node['nodejs']['env_path']}"
 end
 
