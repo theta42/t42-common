@@ -43,8 +43,8 @@ directory node['nodejs']['env_path'] do
 end
 
 file "#{node['nodejs']['env_path']}/package.json" do
-  owner 'node['app']['run_user']'
-  group 'node['app']['run_user']'
+  owner node['app']['run_user']
+  group node['app']['run_user']
   mode 0755
   content ::File.open("#{node['nodejs']['working-dir']}/package.json").read
   action :create
