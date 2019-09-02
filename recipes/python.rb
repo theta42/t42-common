@@ -11,7 +11,7 @@ apt_update
 [
 	"python#{node['python']['version']}",
 	"python#{node['python']['version']}-dev",
-	"python#{node['python']['version'][0]}-pip",
+	"python#{node['python']['version']}-pip",
 
 ].each do |pkg|
 	apt_package pkg
