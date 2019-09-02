@@ -58,7 +58,7 @@ execute 'Install NPM package.json' do
 	user node['app']['run_user']
 	group node['app']['run_user']
 	environment ({'HOME' => "/home/#{node['app']['run_user']}"})
-	command "npm --prefix #{node['nodejs']['env_path']} --python="`which python2.7`" install #{node['nodejs']['env_path']}"
+	command "npm --prefix #{node['nodejs']['env_path']} --python=\"`which python2.7`\" install #{node['nodejs']['env_path']}"
 end
 
 directory "/var/log/node/#{node['app']['name']}" do
