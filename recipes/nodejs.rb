@@ -1,4 +1,4 @@
-version = {
+version_map = {
 	8 => {
 		'version' => '8.16.1',
 		'url' => 'https://nodejs.org/dist/v8.16.1/node-v8.16.1-linux-x64.tar.gz',
@@ -20,10 +20,6 @@ unless node['nodejs']['working-dir'][0] == '/'
 	node.override['nodejs']['working-dir'] = "#{node['working-dir']}/#{node['nodejs']['working-dir']}"
 end
 
-unless node['nodejs']['install_version']
-	node.default['nodejs']['install_version'] = 12
-end
-
 unless version.key?(node['nodejs']['install_version'])
 	raise <<~EOH
 		Unsupported NodeJS version #{node['nodejs']['install_version']}.
@@ -31,7 +27,7 @@ unless version.key?(node['nodejs']['install_version'])
 	EOH
 end
 
-set_version = version[node['nodejs']['install_version']]
+set_version = version_map[node['nodejs']['install_version']]
 
 node.default['nodejs']['install_method'] = 'binary'
 node.default['nodejs']['version'] = set_version['version'].to_str
