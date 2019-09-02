@@ -20,10 +20,10 @@ unless node['nodejs']['working-dir'][0] == '/'
 	node.override['nodejs']['working-dir'] = "#{node['working-dir']}/#{node['nodejs']['working-dir']}"
 end
 
-unless version.key?(node['nodejs']['install_version'])
+unless version_map.key?(node['nodejs']['install_version'])
 	raise <<~EOH
 		Unsupported NodeJS version #{node['nodejs']['install_version']}.
-		Supports #{version.keys}.
+		Supports #{version_map.keys}.
 	EOH
 end
 
