@@ -34,7 +34,7 @@ node.default['nodejs']['version'] = set_version['version'].to_str
 node.default['nodejs']['binary']['url'] = set_version['url']
 node.default['nodejs']['binary']['checksum'] = set_version['checksum']
 
-node.default['nodejs']['env_path'] = "/opt/theta42/#{node['app']['name']}/env/node"
+node.default['nodejs']['env_path'] = "/home/#{node['app']['run_user']}/app/#{node['app']['name']}/env/node"
 
 include_recipe "nodejs"
 
@@ -43,8 +43,8 @@ directory node['nodejs']['env_path'] do
 end
 
 file "#{node['nodejs']['env_path']}/package.json" do
-  owner 'root'
-  group 'root'
+  owner 'node['app']['run_user']'
+  group 'node['app']['run_user']'
   mode 0755
   content ::File.open("#{node['nodejs']['working-dir']}/package.json").read
   action :create
@@ -52,6 +52,7 @@ end
 
 execute 'Install NPM package.json' do
 	cwd node['nodejs']['env_path']
+	user node['app']['run_user']
 	command "npm --prefix #{node['nodejs']['env_path']} install #{node['nodejs']['env_path']}"
 end
 
