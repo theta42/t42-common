@@ -39,7 +39,10 @@ node.default['nodejs']['env_path'] = "/home/#{node['app']['run_user']}/app/#{nod
 include_recipe "nodejs"
 
 directory node['nodejs']['env_path'] do
-	recursive true
+  owner node['app']['run_user']
+  group node['app']['run_user']
+  mode 0755
+  recursive true
 end
 
 file "#{node['nodejs']['env_path']}/package.json" do
