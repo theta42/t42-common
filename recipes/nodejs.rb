@@ -2,7 +2,7 @@ version_map = {
 	8 => {
 		'version' => '8.16.1',
 		'url' => 'https://nodejs.org/dist/v8.16.1/node-v8.16.1-linux-x64.tar.gz',
-		'checksum' => 'a7f60fc6f41bedd2a387bc99067df11d53161fa235b8c90c6b5e73b0dff9af8e'
+		'checksum' => '8ef575b64edbb6c04e506d8c8e0c5f92b90f4752841892c5adbb3a1e02863f46'
 	},
 	10 => {
 		'version' => '10.16.3',
