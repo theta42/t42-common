@@ -8,10 +8,12 @@ end
 
 apt_update
 
+pip_version = node['python']['version'][0] == 2 ? '' : '3'
+
 [
 	"python#{node['python']['version']}",
 	"python#{node['python']['version']}-dev",
-	"python#{node['python']['version']}-pip",
+	"python#{pip_version}-pip",
 
 ].each do |pkg|
 	apt_package pkg
