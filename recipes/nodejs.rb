@@ -1,13 +1,18 @@
 version = {
 	8 => {
-		'version' => '8.16.0',
-		'url' => 'https://nodejs.org/dist/latest-v8.x/node-v8.16.0-linux-x64.tar.gz',
-		'checksum' => 'b391450e0fead11f61f119ed26c713180cfe64b363cd945bac229130dfab64fa'
+		'version' => '8.16.1',
+		'url' => 'https://nodejs.org/dist/v8.16.1/node-v8.16.1-linux-x64.tar.gz',
+		'checksum' => 'a7f60fc6f41bedd2a387bc99067df11d53161fa235b8c90c6b5e73b0dff9af8e'
 	},
 	10 => {
-		'version' => '10.15.3',
-		'url' => 'https://nodejs.org/dist/latest-v10.x/node-v10.15.3-linux-x64.tar.gz',
-		'checksum' => '6c35b85a7cd4188ab7578354277b2b2ca43eacc864a2a16b3669753ec2369d52'
+		'version' => '10.16.3',
+		'url' => 'https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.gz',
+		'checksum' => '2f0397bb81c1d0c9901b9aff82a933257bf60f3992227b86107111a75b9030d9'
+	},
+	12 => {
+		'version' => '12.9.1',
+		'url' => 'https://nodejs.org/dist/v12.9.1/node-v12.9.1-linux-x64.tar.gz',
+		'checksum' => '5488e9d9e860eb344726aabdc8f90d09e36602da38da3d16a7ee852fd9fbd91f'
 	}
 }
 
@@ -16,7 +21,7 @@ unless node['nodejs']['working-dir'][0] == '/'
 end
 
 unless node['nodejs']['install_version']
-	node.default['nodejs']['install_version'] = 8
+	node.default['nodejs']['install_version'] = 12
 end
 
 unless version.key?(node['nodejs']['install_version'])
