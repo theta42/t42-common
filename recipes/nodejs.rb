@@ -34,7 +34,7 @@ node.default['nodejs']['version'] = set_version['version'].to_str
 node.default['nodejs']['binary']['url'] = set_version['url']
 node.default['nodejs']['binary']['checksum'] = set_version['checksum']
 
-node.default['nodejs']['env_path'] = "/home/#{node['app']['run_user']}/app/#{node['app']['name']}/env/node"
+node.default['nodejs']['env_path'] = "/opt/theta42/app/#{node['app']['name']}/env/node"
 
 include_recipe "nodejs"
 
@@ -60,7 +60,7 @@ execute 'Install NPM package.json' do
 	user node['app']['run_user']
 	group node['app']['run_user']
 	environment ({'HOME' => node['app']['run_user'] == 'root' ? '/root/' : "/home/#{node['app']['run_user']}"})
-	command "{do_sudo} npm --prefix #{node['nodejs']['env_path']} --python=\"`which python2.7`\" install #{node['nodejs']['env_path']}"
+	command "#{do_sudo} npm --prefix #{node['nodejs']['env_path']} --python=\"`which python2.7`\" install #{node['nodejs']['env_path']}"
 end
 
 directory "/var/log/node/#{node['app']['name']}" do
