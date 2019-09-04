@@ -64,5 +64,13 @@ execute 'Install NPM package.json' do
 end
 
 directory "/var/log/node/#{node['app']['name']}" do
+	owner node['app']['run_user']
+	group node['app']['run_user']
+	mode 0755
 	recursive true
+end
+
+bash 'Add Node path to env' do
+	code "echo 'NODE_PATH=\"${node['nodejs']['env_path']}\"' > /etc/environment"
+	not_if "grep NODE_PATH /etc/environment"
 end
