@@ -53,12 +53,14 @@ file "#{node['nodejs']['env_path']}/package.json" do
   action :create
 end
 
+do_sudo = node['app']['run_user'] == 'root' ? 'sudo' : ''
+
 execute 'Install NPM package.json' do
 	cwd node['nodejs']['env_path']
 	user node['app']['run_user']
 	group node['app']['run_user']
 	environment ({'HOME' => node['app']['run_user'] == 'root' ? '/root/' : "/home/#{node['app']['run_user']}"})
-	command "npm --prefix #{node['nodejs']['env_path']} --python=\"`which python2.7`\" install #{node['nodejs']['env_path']}"
+	command "{do_sudo} npm --prefix #{node['nodejs']['env_path']} --python=\"`which python2.7`\" install #{node['nodejs']['env_path']}"
 end
 
 directory "/var/log/node/#{node['app']['name']}" do
