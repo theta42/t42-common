@@ -71,6 +71,6 @@ directory "/var/log/node/#{node['app']['name']}" do
 end
 
 bash 'Add Node path to env' do
-	code "echo 'NODE_PATH=\"#{node['nodejs']['env_path']}\"' > /etc/environment"
+	code "echo 'NODE_PATH=\"#{node['nodejs']['env_path']}/node_modules\"' > /etc/environment"
 	not_if "grep NODE_PATH /etc/environment"
 end
