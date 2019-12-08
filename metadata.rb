@@ -4,7 +4,7 @@ maintainer_email 'you@example.com'
 license 'All Rights Reserved'
 description 'Installs/Configures t42-common'
 long_description 'Installs/Configures t42-common'
-version '0.5.3'
+version '0.5.4'
 chef_version '>= 13.0'
 
 depends 'nodejs'
