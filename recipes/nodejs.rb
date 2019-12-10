@@ -84,7 +84,7 @@ if node['nodeJS']['service']
 
 	    [Service]
 	    Environment=NODE_PORT=#{node['nodejs']['port']}
-	    Environment=NODE_PATH=#{node['nodejs']['env_path']}/node_modules/
+	    Environment=NODE_PATH=#{node['nodejs']['env_path']}/node_modules
 	    Type=simple
 	    WorkingDirectory=#{node['nodejs']['working-dir']}
 	    ExecStart=/usr/bin/env node #{node['nodejs']['working-dir']}/#{node['nodejs']['exec_file']}
