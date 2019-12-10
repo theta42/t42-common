@@ -56,7 +56,7 @@ directory '/var/log/nginx/' do
 end
 
 template '/etc/openresty/sites-enabled/host.conf' do
-	source 'openresty/host.conf.erb'
+	source 'openresty/simple-proxy.conf.erb'
 end
 
 systemd_unit 'openresty' do
