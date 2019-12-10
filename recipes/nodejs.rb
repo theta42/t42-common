@@ -74,3 +74,24 @@ bash 'Add Node path to env' do
 	code "echo 'NODE_PATH=\"#{node['nodejs']['env_path']}/node_modules\"' > /etc/environment"
 	not_if "grep NODE_PATH /etc/environment"
 end
+
+systemd_unit "node-#{node['app']['name']}.service" do
+  content <<~EOU
+    [Unit]
+    Description=NodeJS app for #{node['app']['name']}
+    After=network.target
+    [Service]
+    Environment=NODEPORT=#{node['nodejs']['port']}
+    Environment=djangoURL=http://#{node['app']['domain']}
+    Environment=NODE_ENV=staging
+    Environment=NODE_PATH=#{node['nodejs']['env_path']}/node_modules/
+    Type=simple
+    User=root
+    WorkingDirectory=#{node['nodejs']['working-dir']}
+    ExecStart=/usr/local/bin/node #{node['nodejs']['working-dir']}/#{node['nodejs']['exec_file']}
+    Restart=on-failure
+    [Install]
+    WantedBy=multi-user.target
+  EOU
+  action [:create, :enable, :start]
+end
