@@ -75,7 +75,7 @@ bash 'Add Node path to env' do
 	not_if "grep NODE_PATH /etc/environment"
 end
 
-if node['web']['do_ssl']
+if node['nodeJS']['service']
 	systemd_unit "node-#{node['app']['name']}.service" do
 	  content <<~EOU
 	    [Unit]
