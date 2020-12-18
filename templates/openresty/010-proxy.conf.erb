@@ -44,6 +44,11 @@ server {
                 local res = red:array_to_hash(res)
 
                 if not res["ip"] then
+                        res, err = red:hgetall("proxy_host_"..host:gsub("^[a-zA-Z0-9%-]*", "*"))
+                        res = red:array_to_hash(res)
+                end
+
+                if not res["ip"] then
                         ngx.log(ngx.ERR, "no host found for key ", host)
                         return ngx.exit(406)
                 end
