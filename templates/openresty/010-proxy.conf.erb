@@ -24,6 +24,15 @@ server {
                 local uri = ngx.var.uri
                 local scheme = ngx.var.scheme
 
+                local json = require "cjson"
+                local socket = assert(require "socket.unix"())
+				local function connect(path)
+					assert(socket:settimeout(.1))
+					local status,err = pcall(function() assert(socket:connect(path)) end)
+					if status then return true end
+					return false
+				end
+
                 if not host then
                         ngx.log(ngx.ERR, "no host header found")
                         return ngx.exit(499)
@@ -41,12 +50,21 @@ server {
                 end
 
                 local res, err = red:hgetall("proxy_host_"..host)
-                local res = red:array_to_hash(res)
+				local res = red:array_to_hash(res)
 
-                if not res["ip"] then
-                        res, err = red:hgetall("proxy_host_"..host:gsub("^[a-zA-Z0-9%-]*", "*"))
-                        res = red:array_to_hash(res)
-                end
+				if not res["ip"] then
+					if connect("/var/run/mysocket") then 
+						assert(socket:send(host))
+						while 1 do
+							local s, status, partial = socket:receive()
+							if partial then
+								res = json.decode(partial)
+								socket:close()
+								break
+							end
+						end
+					end
+				end
 
                 if not res["ip"] then
                         ngx.log(ngx.ERR, "no host found for key ", host)
