@@ -18,6 +18,11 @@ version_map = {
 		'version' => '13.12.0',
 		'url' => 'https://nodejs.org/dist/v13.12.0/node-v13.12.0-linux-x64.tar.gz',
 		'checksum' => '3e66b14bbeb9ea1ba129fae7c65374844f4ddaf1e48e2bc19b3b2570e158e362'
+	},
+	18 => {
+		'version' => '18.15.0',
+		'url' => 'https://nodejs.org/dist/v18.15.0/node-v18.15.0-linux-x64.tar.gz',
+		'checksum' => 'b298a73a9fc07badfa9e4a2e86ed48824fc9201327cdc43e3f3f58b273c535e7'
 	}
 }
 
