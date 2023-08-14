@@ -61,6 +61,9 @@ directory '/var/log/nginx/' do
 end
 
 if node['web']['t42-proxy']
+	execute 'luarocks install luasocket' do
+	  command 'luarocks install luasocket'
+	end
 	template '/etc/openresty/sites-enabled/proxy.conf' do
 		source 'openresty/010-proxy.conf.erb'
 	end
